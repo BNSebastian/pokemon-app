@@ -1,16 +1,13 @@
-﻿using AutoMapper;
+﻿using API.Entities.PokemonEntity.controller;
+using API.Entities.PokemonEntity.DTO;
+using API.Entities.PokemonEntity.model;
+using API.Entities.PokemonEntity.repository;
+using API.Entities.ReviewEntity.repository;
+using AutoMapper;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using PokemonReviewApp.Controllers;
-using PokemonReviewApp.Dto;
-using PokemonReviewApp.Interfaces;
-using PokemonReviewApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PokemonReviewApp.Tests.Controller
@@ -31,9 +28,9 @@ namespace PokemonReviewApp.Tests.Controller
         public void PokemonController_GetPokemons_ReturnOK()
         {
             //Arrange
-            var pokemons = A.Fake<ICollection<PokemonDto>>();
-            var pokemonList = A.Fake<List<PokemonDto>>();
-            A.CallTo(() => _mapper.Map<List<PokemonDto>>(pokemons)).Returns(pokemonList);
+            var pokemons = A.Fake<ICollection<PokemonReadDto>>();
+            var pokemonList = A.Fake<List<PokemonReadDto>>();
+            A.CallTo(() => _mapper.Map<List<PokemonReadDto>>(pokemons)).Returns(pokemonList);
             var controller = new PokemonController(_pokemonRepository, _reviewRepository, _mapper);
 
             //Act
@@ -52,9 +49,9 @@ namespace PokemonReviewApp.Tests.Controller
             int catId = 2;
             var pokemonMap = A.Fake<Pokemon>();
             var pokemon = A.Fake<Pokemon>();
-            var pokemonCreate = A.Fake<PokemonDto>();
-            var pokemons = A.Fake<ICollection<PokemonDto>>();
-            var pokmonList = A.Fake<IList<PokemonDto>>();
+            var pokemonCreate = A.Fake<PokemonCreateDto>();
+            var pokemons = A.Fake<ICollection<PokemonReadDto>>();
+            var pokmonList = A.Fake<IList<PokemonReadDto>>();
             A.CallTo(() => _pokemonRepository.GetPokemonTrimToUpper(pokemonCreate)).Returns(pokemon);
             A.CallTo(() => _mapper.Map<Pokemon>(pokemonCreate)).Returns(pokemon);
             A.CallTo(() => _pokemonRepository.CreatePokemon(ownerId, catId, pokemonMap)).Returns(true);

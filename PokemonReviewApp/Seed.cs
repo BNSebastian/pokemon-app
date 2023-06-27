@@ -1,5 +1,11 @@
-﻿using PokemonReviewApp.Data;
-using PokemonReviewApp.Models;
+﻿using API.Data;
+using API.Entities.ReviewEntity.model;
+using API.Entities.CountryEntity.model;
+using API.Entities.OwnerEntity.model;
+using API.Entities.PokemonEntity.model;
+using API.Entities.ReviewerEntity.model;
+using PokemonReviewApp.Data;
+using API.Models.CategoryEntity.model;
 
 namespace PokemonReviewApp
 {
@@ -24,7 +30,7 @@ namespace PokemonReviewApp
                             BirthDate = new DateTime(1903,1,1),
                             PokemonCategories = new List<PokemonCategory>()
                             {
-                                new PokemonCategory { Category = new Category() { Name = "Electric"}}
+                                new PokemonCategory { Category = new API.Models.CategoryEntity.model.Category() { Name = "Electric"}}
                             },
                             Reviews = new List<Review>()
                             {

@@ -1,15 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PokemonReviewApp.Models;
+﻿using API.Data;
+using API.Entities.CountryEntity.model;
+using API.Entities.OwnerEntity.model;
+using API.Entities.PokemonEntity.model;
+using API.Entities.ReviewEntity.model;
+using API.Entities.ReviewerEntity.model;
+using API.Models.CategoryEntity.model;
+using Microsoft.EntityFrameworkCore;
+using PokemonReviewApp.Authentication.Entity;
 
 namespace PokemonReviewApp.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        }
-
+        public DbSet<AppUser> AppUsers { get; set; } 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Owner> Owners { get; set; }

@@ -1,38 +1,105 @@
+/******************************************
+* Service Configuration
+******************************************/
+using API.Entities.CountryEntity.repository;
+using API.Entities.OwnerEntity.repository;
+using API.Entities.PokemonEntity.repository;
+using API.Entities.ReviewEntity.repository;
+using API.Entities.ReviewerEntity.repository;
+using API.Models.CategoryEntity.repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using PokemonReviewApp;
+using PokemonReviewApp.Authentication.Entity;
+using PokemonReviewApp.Authentication.Interfaces;
 using PokemonReviewApp.Data;
-using PokemonReviewApp.Interfaces;
-using PokemonReviewApp.Repository;
+using System.Text;
 using System.Text.Json.Serialization;
 
+
+// Creating a new web application builder
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+/******************************************
+* Controllers Configuration
+******************************************/
+// Add controller services to the container
 builder.Services.AddControllers();
-builder.Services.AddTransient<Seed>();
-builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+/******************************************
+* JSON Serialization Configuration
+******************************************/
+// Configure JSON serialization options to ignore object cycles
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+/******************************************
+* AutoMapper Configuration
+******************************************/
+// Add AutoMapper for object mapping
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+/******************************************
+* Repository Configuration
+******************************************/
+// Add scoped instances of repository interfaces
 builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewerRepository, ReviewerRepository>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+/******************************************
+* Swagger Configuration
+******************************************/
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+/******************************************
+* Token Service Configuration
+******************************************/
+builder.Services.AddScoped<ITokenService, TokenService>(); // Add token service for authentication
+
+/******************************************
+* Authentication Configuration
+******************************************/
+// Add JWT Bearer authentication scheme
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
+/******************************************
+* Database Context Configuration
+******************************************/
 builder.Services.AddDbContext<DataContext>(options =>
 {
+    // Add DbContext with SQL Server connection
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+// Build the application
 var app = builder.Build();
 
+
+/******************************************
+* Data Seeding
+******************************************/
+// Check if "seeddata" argument is passed during runtime
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
     SeedData(app);
 
+// Method for seeding data into the database
 void SeedData(IHost app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
@@ -44,20 +111,30 @@ void SeedData(IHost app)
     }
 }
 
-
-
-
+/******************************************
+* HTTP Request Pipeline Configuration
+******************************************/
 // Configure the HTTP request pipeline.
+
+// Check if the environment is set to development
 if (app.Environment.IsDevelopment())
 {
+    // Enable Swagger and Swagger UI
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Redirect HTTP requests to HTTPS
 app.UseHttpsRedirection();
 
+// Enable authentication middleware
+app.UseAuthentication();
+
+// Enable authorization middleware
 app.UseAuthorization();
 
+// Map controllers
 app.MapControllers();
 
+// Run the application
 app.Run();

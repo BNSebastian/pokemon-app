@@ -1,15 +1,17 @@
 ﻿using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.InMemory;
 using PokemonReviewApp.Data;
-using PokemonReviewApp.Models;
-using PokemonReviewApp.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+
+using API.Models.CategoryEntity.model;
+using API.Data;
+using API.Entities.PokemonEntity.model;
+using API.Entities.ReviewEntity.model;
+using API.Entities.ReviewerEntity.model;
+using API.Entities.PokemonEntity.repository;
 
 namespace PokemonReviewApp.Tests.Repository
 {
