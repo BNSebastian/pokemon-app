@@ -1,22 +1,32 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
+import { AngularMaterialModule } from './angular-material.module';
 import { AppRoutingModule } from './app-routing.module';
-import { PokemonBaseModule } from './pokemon-base/pokemon-base.module';
-import { PokemonTemplateFormComponent } from './pokemon-template-form/pokemon-template-form.component';
-import { FormsModule } from '@angular/forms';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { NavMenuComponent } from './home/nav-menu/nav-menu.component';
+import { NotfoundComponent } from './home/notfound/notfound.component';
+import { PokemonBaseModule } from './pokemon-base/pokemon-base.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PokemonTemplateFormComponent,
     NotfoundComponent,
     HomeComponent,
+    NavMenuComponent,
   ],
-  imports: [AppRoutingModule, BrowserModule, FormsModule, PokemonBaseModule],
+  imports: [
+    AngularMaterialModule,
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
+    PokemonBaseModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

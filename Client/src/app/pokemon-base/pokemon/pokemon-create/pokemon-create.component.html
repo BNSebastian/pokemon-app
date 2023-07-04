@@ -1,0 +1,38 @@
+<div [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Name -->
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" placeholder="Type a name" required />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>owner</mat-label>
+    <mat-select
+      formControlName="ownerId"
+      placeholder="select an owner"
+      required
+    >
+      <mat-option *ngFor="let current of owners" [value]="current.id">
+        {{ current.firstName }} {{ current.lastName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>category</mat-label>
+    <mat-select formControlName="catId" placeholder="select an owner" required>
+      <mat-option *ngFor="let current of categories" [value]="current.id">
+        {{ current.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">
+      Save
+    </button>
+    <button mat-flat-button color="secondary" [routerLink]="['/owner']">
+      Cancel
+    </button>
+  </div>
+</div>

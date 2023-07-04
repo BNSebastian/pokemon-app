@@ -1,0 +1,28 @@
+<div>
+  <div [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Name -->
+    <mat-form-field>
+      <mat-label>id</mat-label>
+      <input matInput formControlName="id" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <div>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Save
+      </button>
+      <button mat-flat-button color="secondary" [routerLink]="['/category']">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

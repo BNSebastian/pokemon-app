@@ -1,17 +1,4 @@
-<router-outlet
-  ><div>
-    <a
-      *ngFor="let item of nav"
-      [routerLink]="item.link"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: item.exact }"
-      >{{ item.name }}</a
-    >
-  </div>
-
-  <app-pokemon-list></app-pokemon-list>
-
-  <br />
-
-  <app-pokemon-template-form></app-pokemon-template-form>
-</router-outlet>
+<app-nav-menu></app-nav-menu>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

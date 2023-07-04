@@ -1,0 +1,42 @@
+<table mat-table [dataSource]="dataArray">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let current">{{ current.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef>First name</th>
+    <td mat-cell *matCellDef="let current">{{ current.firstName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef>Last name</th>
+    <td mat-cell *matCellDef="let current">{{ current.lastName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="gym">
+    <th mat-header-cell *matHeaderCellDef>Gym</th>
+    <td mat-cell *matCellDef="let current">{{ current.gym }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>Edit</th>
+    <td mat-cell *matCellDef="let current">
+      <button mat-button color="primary" (click)="editData(current.id)">
+        Edit
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>Delete</th>
+    <td mat-cell *matCellDef="let current">
+      <button mat-button color="primary" (click)="deleteData(current.id)">
+        Delete
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>

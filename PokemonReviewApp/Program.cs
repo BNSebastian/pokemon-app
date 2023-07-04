@@ -78,6 +78,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+/**************************************
+ * CORS Configuration
+ **************************************/
+
+// Enable CORS for specified origins / all origins
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+    });
+});
+
 /******************************************
 * Database Context Configuration
 ******************************************/
@@ -123,6 +137,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Use the CORS policy defined earlier
+app.UseCors("CorsPolicy"); 
 
 // Redirect HTTP requests to HTTPS
 app.UseHttpsRedirection();
