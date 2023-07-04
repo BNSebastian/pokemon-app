@@ -4,3 +4,9 @@ export interface Review {
   text: string;
   rating: number;
 }
+
+export interface ReviewCreate {
+  title: string;
+  text: string;
+  rating: number;
+}

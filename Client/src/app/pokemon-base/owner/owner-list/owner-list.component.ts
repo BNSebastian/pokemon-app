@@ -1,8 +1,8 @@
+import { Owner } from 'src/app/_models/owner';
+import { OwnerService } from 'src/app/_services/owner.service';
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Owner } from '../../../models/owner';
-import { OwnerService } from '../../../services/owner.service';
 
 @Component({
   selector: 'app-owner-list',

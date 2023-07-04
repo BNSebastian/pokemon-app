@@ -1,0 +1,46 @@
+<div [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Name -->
+  <mat-form-field>
+    <mat-label>title</mat-label>
+    <input matInput formControlName="title" placeholder="Type a title" required />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>text</mat-label>
+    <input matInput formControlName="text" placeholder="Type a text" required />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>rating</mat-label>
+    <input matInput formControlName="rating" placeholder="Type a rating" required />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>reviewer</mat-label>
+    <mat-select formControlName="reviewerId"
+                placeholder="select an owner"
+                required>
+      <mat-option *ngFor="let current of reviewers" [value]="current.id">
+        {{ current.firstName }} {{ current.lastName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>pokemon</mat-label>
+    <mat-select formControlName="pokeId" placeholder="select an owner" required>
+      <mat-option *ngFor="let current of pokemons" [value]="current.id">
+        {{ current.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">
+      Save
+    </button>
+    <button mat-flat-button color="secondary" [routerLink]="['/review']">
+      Cancel
+    </button>
+  </div>
+</div>

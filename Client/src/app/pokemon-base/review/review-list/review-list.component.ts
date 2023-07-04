@@ -1,42 +1,41 @@
-import { Reviewer } from 'src/app/_models/reviewer';
-import { ReviewerService } from 'src/app/_services/reviewer.service';
+import { Review } from 'src/app/_models/review';
+import { ReviewService } from 'src/app/_services/review.service';
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-reviewer-list',
-  templateUrl: './reviewer-list.component.html',
-  styleUrls: ['./reviewer-list.component.css'],
+  selector: 'app-review-list',
+  templateUrl: './review-list.component.html',
+  styleUrls: ['./review-list.component.css'],
 })
-export class ReviewerListComponent {
-  // members
-  public data!: Reviewer;
-  public dataArray!: Reviewer[];
+export class ReviewListComponent {
+  public data!: Review;
+  public dataArray!: Review[];
   public columnsToDisplay: string[] = [
     'id',
-    'firstName',
-    'lastName',
+    'title',
+    'text',
+    'rating',
     'edit',
     'delete',
   ];
 
-  //constructor
-  constructor(private service: ReviewerService, private router: Router) {}
+  constructor(private service: ReviewService, private router: Router) {}
 
-  // methods
   ngOnInit(): void {
     this.loadData();
   }
 
   loadData() {
-    this.service.getAll().subscribe((apiData: Reviewer[]) => {
+    this.service.getAll().subscribe((apiData: Review[]) => {
       this.dataArray = apiData;
+      console.log(this.dataArray);
     });
   }
 
   editData(id: number) {
-    this.router.navigate(['/reviewer', id]);
+    this.router.navigate(['/review', id]);
   }
 
   deleteData(id: number) {
@@ -51,7 +50,7 @@ export class ReviewerListComponent {
       }
     );
     setTimeout(() => {
-      this.router.navigate(['/reviewer'], { skipLocationChange: true });
+      this.router.navigate(['/review'], { skipLocationChange: true });
     }, 300);
   }
 }

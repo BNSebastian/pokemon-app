@@ -1,5 +1,5 @@
-import { Country } from 'src/app/models/country';
-import { CountryService } from 'src/app/services/country.service';
+import { Country } from 'src/app/_models/country';
+import { CountryService } from 'src/app/_services/country.service';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';

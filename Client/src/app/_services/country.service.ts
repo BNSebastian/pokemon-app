@@ -3,37 +3,36 @@ import { catchError, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from '../environments/environment';
-import { Owner, OwnerCreate } from '../models/owner';
+import { environment } from '../_environments/environment';
+import { Country, CountryCreate } from '../_models/country';
 
-const API_LINK = environment.ownerUrl;
+const API_LINK = environment.countryUrl;
 
 @Injectable({
   providedIn: 'root',
 })
-export class OwnerService {
+export class CountryService {
   constructor(private http: HttpClient) {}
 
-  getById(id: number): Observable<Owner> {
-    return this.http.get<Owner>(`${API_LINK}/${id}`);
+  getById(id: number): Observable<Country> {
+    return this.http.get<Country>(`${API_LINK}/${id}`);
   }
 
-  getAll(): Observable<Owner[]> {
-    return this.http.get<Owner[]>(API_LINK);
+  getAll(): Observable<Country[]> {
+    return this.http.get<Country[]>(API_LINK);
   }
 
-  create(countryId: number, owner: OwnerCreate): Observable<any> {
-    const url = `${API_LINK}?countryId=${countryId}`;
-    return this.http.post(url, owner).pipe(
+  create(entity: CountryCreate): Observable<CountryCreate> {
+    return this.http.post<CountryCreate>(API_LINK, entity).pipe(
       catchError((error: any) => {
         throw error;
       })
     );
   }
 
-  update(entity: Owner): Observable<Owner> {
+  update(entity: Country): Observable<Country> {
     const url = `${API_LINK}/${entity.id}`;
-    return this.http.put<Owner>(url, entity).pipe(
+    return this.http.put<Country>(url, entity).pipe(
       catchError((error: any) => {
         throw error;
       })

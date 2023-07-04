@@ -1,7 +1,5 @@
-import { CategoryCreate } from 'src/app/models/category';
-import { CountryCreate } from 'src/app/models/country';
-import { CategoryService } from 'src/app/services/category.service';
-import { CountryService } from 'src/app/services/country.service';
+import { CountryCreate } from 'src/app/_models/country';
+import { CountryService } from 'src/app/_services/country.service';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';

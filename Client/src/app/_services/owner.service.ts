@@ -3,36 +3,37 @@ import { catchError, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from '../environments/environment';
-import { Category, CategoryCreate } from '../models/category';
+import { environment } from '../_environments/environment';
+import { Owner, OwnerCreate } from '../_models/owner';
 
-const API_LINK = environment.categoryUrl;
+const API_LINK = environment.ownerUrl;
 
 @Injectable({
   providedIn: 'root',
 })
-export class CategoryService {
+export class OwnerService {
   constructor(private http: HttpClient) {}
 
-  getById(id: number): Observable<Category> {
-    return this.http.get<Category>(`${API_LINK}/${id}`);
+  getById(id: number): Observable<Owner> {
+    return this.http.get<Owner>(`${API_LINK}/${id}`);
   }
 
-  getAll(): Observable<Category[]> {
-    return this.http.get<Category[]>(API_LINK);
+  getAll(): Observable<Owner[]> {
+    return this.http.get<Owner[]>(API_LINK);
   }
 
-  create(entity: CategoryCreate): Observable<CategoryCreate> {
-    return this.http.post<CategoryCreate>(API_LINK, entity).pipe(
+  create(countryId: number, owner: OwnerCreate): Observable<any> {
+    const url = `${API_LINK}?countryId=${countryId}`;
+    return this.http.post(url, owner).pipe(
       catchError((error: any) => {
         throw error;
       })
     );
   }
 
-  update(entity: Category): Observable<Category> {
+  update(entity: Owner): Observable<Owner> {
     const url = `${API_LINK}/${entity.id}`;
-    return this.http.put<Category>(url, entity).pipe(
+    return this.http.put<Owner>(url, entity).pipe(
       catchError((error: any) => {
         throw error;
       })

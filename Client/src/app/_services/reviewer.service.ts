@@ -3,36 +3,36 @@ import { catchError, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from '../environments/environment';
-import { Country, CountryCreate } from '../models/country';
+import { environment } from '../_environments/environment';
+import { Reviewer, ReviewerCreate } from '../_models/reviewer';
 
-const API_LINK = environment.countryUrl;
+const API_LINK = environment.reviewerUrl;
 
 @Injectable({
   providedIn: 'root',
 })
-export class CountryService {
+export class ReviewerService {
   constructor(private http: HttpClient) {}
 
-  getById(id: number): Observable<Country> {
-    return this.http.get<Country>(`${API_LINK}/${id}`);
+  getById(id: number): Observable<Reviewer> {
+    return this.http.get<Reviewer>(`${API_LINK}/${id}`);
   }
 
-  getAll(): Observable<Country[]> {
-    return this.http.get<Country[]>(API_LINK);
+  getAll(): Observable<Reviewer[]> {
+    return this.http.get<Reviewer[]>(API_LINK);
   }
 
-  create(entity: CountryCreate): Observable<CountryCreate> {
-    return this.http.post<CountryCreate>(API_LINK, entity).pipe(
+  create(entity: ReviewerCreate): Observable<ReviewerCreate> {
+    return this.http.post<ReviewerCreate>(API_LINK, entity).pipe(
       catchError((error: any) => {
         throw error;
       })
     );
   }
 
-  update(entity: Country): Observable<Country> {
+  update(entity: Reviewer): Observable<Reviewer> {
     const url = `${API_LINK}/${entity.id}`;
-    return this.http.put<Country>(url, entity).pipe(
+    return this.http.put<Reviewer>(url, entity).pipe(
       catchError((error: any) => {
         throw error;
       })

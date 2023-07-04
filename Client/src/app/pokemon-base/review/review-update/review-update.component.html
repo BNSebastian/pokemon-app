@@ -7,13 +7,18 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>first name</mat-label>
-      <input matInput formControlName="firstName" />
+      <mat-label>title</mat-label>
+      <input matInput formControlName="title" />
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>last name</mat-label>
-      <input matInput formControlName="lastName" />
+      <mat-label>text</mat-label>
+      <input matInput formControlName="text" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>rating</mat-label>
+      <input matInput formControlName="rating" />
     </mat-form-field>
 
     <div>
@@ -23,7 +28,7 @@
               (click)="onSubmit()">
         Save
       </button>
-      <button mat-flat-button color="secondary" [routerLink]="['/reviewer']">
+      <button mat-flat-button color="secondary" [routerLink]="['/review']">
         Cancel
       </button>
     </div>

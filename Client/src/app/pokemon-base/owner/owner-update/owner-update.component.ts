@@ -1,13 +1,14 @@
+import { Owner } from 'src/app/_models/owner';
+import { OwnerService } from 'src/app/_services/owner.service';
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OwnerService } from '../../../services/owner.service';
-import { Owner } from '../../../models/owner';
 
 @Component({
   selector: 'app-owner-update',
   templateUrl: './owner-update.component.html',
-  styleUrls: ['./owner-update.component.css']
+  styleUrls: ['./owner-update.component.css'],
 })
 export class OwnerUpdateComponent {
   form!: FormGroup;
@@ -21,7 +22,7 @@ export class OwnerUpdateComponent {
     private service: OwnerService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -54,7 +55,7 @@ export class OwnerUpdateComponent {
       id: +this.form.controls['id'].value,
       firstName: this.form.controls['firstName'].value,
       lastName: this.form.controls['lastName'].value,
-      gym: this.form.controls['gym'].value
+      gym: this.form.controls['gym'].value,
     };
 
     this.service.update(entry).subscribe(

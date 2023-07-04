@@ -3,8 +3,8 @@ import { catchError, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from '../environments/environment';
-import { Pokemon, PokemonCreate } from '../models/pokemon';
+import { environment } from '../_environments/environment';
+import { Pokemon, PokemonCreate } from '../_models/pokemon';
 
 const API_LINK = environment.pokemonUrl;
 @Injectable({
@@ -12,7 +12,6 @@ const API_LINK = environment.pokemonUrl;
 })
 export class PokemonService {
   constructor(private http: HttpClient) {}
-
 
   getById(id: number): Observable<Pokemon> {
     return this.http.get<Pokemon>(`${API_LINK}/${id}`);
@@ -22,7 +21,11 @@ export class PokemonService {
     return this.http.get<Pokemon[]>(API_LINK);
   }
 
-  create(ownerId: number, catId: number, owner: PokemonCreate): Observable<any> {
+  create(
+    ownerId: number,
+    catId: number,
+    owner: PokemonCreate
+  ): Observable<any> {
     const url = `${API_LINK}?ownerId=${ownerId}&catId=${catId}`;
     return this.http.post(url, owner).pipe(
       catchError((error: any) => {

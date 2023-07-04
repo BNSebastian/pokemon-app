@@ -1,8 +1,8 @@
+import { Pokemon } from 'src/app/_models/pokemon';
+import { PokemonService } from 'src/app/_services/pokemon.service';
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Pokemon } from '../../../models/pokemon';
-import { PokemonService } from '../../../services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',

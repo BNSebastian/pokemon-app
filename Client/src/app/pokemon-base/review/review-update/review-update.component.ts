@@ -1,24 +1,25 @@
-import { Pokemon } from 'src/app/_models/pokemon';
-import { PokemonService } from 'src/app/_services/pokemon.service';
+import { Review } from 'src/app/_models/review';
+import { ReviewService } from 'src/app/_services/review.service';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-pokemon-update',
-  templateUrl: './pokemon-update.component.html',
-  styleUrls: ['./pokemon-update.component.css'],
+  selector: 'app-review-update',
+  templateUrl: './review-update.component.html',
+  styleUrls: ['./review-update.component.css'],
 })
-export class PokemonUpdateComponent {
+export class ReviewUpdateComponent {
   form!: FormGroup;
 
   id?: number;
-  name?: string;
-  birthDate?: string;
+  title?: string;
+  text?: string;
+  rating?: number;
 
   constructor(
-    private service: PokemonService,
+    private service: ReviewService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -26,8 +27,9 @@ export class PokemonUpdateComponent {
   ngOnInit() {
     this.form = new FormGroup({
       id: new FormControl({ value: '', disabled: true }),
-      name: new FormControl(''),
-      birthDate: new FormControl(''),
+      title: new FormControl(''),
+      text: new FormControl(''),
+      rating: new FormControl(''),
     });
 
     this.loadData();
@@ -41,17 +43,19 @@ export class PokemonUpdateComponent {
     // fetch the city from the server
     this.service.getById(id).subscribe((apiData) => {
       this.id = apiData.id;
-      this.name = apiData.name;
-      this.birthDate = apiData.birthDate;
+      this.title = apiData.title;
+      this.text = apiData.text;
+      this.rating = apiData.rating;
       this.form.patchValue(apiData);
     });
   }
 
   onSubmit() {
-    const entry: Pokemon = {
+    const entry: Review = {
       id: +this.form.controls['id'].value,
-      name: this.form.controls['name'].value,
-      birthDate: this.form.controls['birthDate'].value,
+      title: this.form.controls['title'].value,
+      text: this.form.controls['text'].value,
+      rating: +this.form.controls['rating'].value,
     };
 
     this.service.update(entry).subscribe(
@@ -66,7 +70,7 @@ export class PokemonUpdateComponent {
     );
 
     setTimeout(() => {
-      this.router.navigate(['/pokemon'], { skipLocationChange: true });
+      this.router.navigate(['/review'], { skipLocationChange: true });
     }, 300);
   }
 }

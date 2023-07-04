@@ -1,13 +1,14 @@
+import { Owner } from 'src/app/_models/owner';
+import { PokemonCreate } from 'src/app/_models/pokemon';
+import { OwnerService } from 'src/app/_services/owner.service';
+import { PokemonService } from 'src/app/_services/pokemon.service';
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Category } from '../../../models/category';
-import { Owner } from '../../../models/owner';
-import { PokemonCreate } from '../../../models/pokemon';
-import { CategoryService } from '../../../services/category.service';
-import { OwnerService } from '../../../services/owner.service';
-import { PokemonService } from '../../../services/pokemon.service';
+import { Category } from '../../../_models/category';
+import { CategoryService } from '../../../_services/category.service';
 
 @Component({
   selector: 'app-pokemon-create',

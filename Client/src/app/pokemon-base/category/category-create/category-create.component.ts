@@ -1,5 +1,5 @@
-import { Category, CategoryCreate } from 'src/app/models/category';
-import { CategoryService } from 'src/app/services/category.service';
+import { Category, CategoryCreate } from 'src/app/_models/category';
+import { CategoryService } from 'src/app/_services/category.service';
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';

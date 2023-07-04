@@ -3,36 +3,36 @@ import { catchError, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from '../environments/environment';
-import { Reviewer, ReviewerCreate } from '../models/reviewer';
+import { environment } from '../_environments/environment';
+import { Category, CategoryCreate } from '../_models/category';
 
-const API_LINK = environment.reviewerUrl;
+const API_LINK = environment.categoryUrl;
 
 @Injectable({
   providedIn: 'root',
 })
-export class ReviewerService {
+export class CategoryService {
   constructor(private http: HttpClient) {}
 
-  getById(id: number): Observable<Reviewer> {
-    return this.http.get<Reviewer>(`${API_LINK}/${id}`);
+  getById(id: number): Observable<Category> {
+    return this.http.get<Category>(`${API_LINK}/${id}`);
   }
 
-  getAll(): Observable<Reviewer[]> {
-    return this.http.get<Reviewer[]>(API_LINK);
+  getAll(): Observable<Category[]> {
+    return this.http.get<Category[]>(API_LINK);
   }
 
-  create(entity: ReviewerCreate): Observable<ReviewerCreate> {
-    return this.http.post<ReviewerCreate>(API_LINK, entity).pipe(
+  create(entity: CategoryCreate): Observable<CategoryCreate> {
+    return this.http.post<CategoryCreate>(API_LINK, entity).pipe(
       catchError((error: any) => {
         throw error;
       })
     );
   }
 
-  update(entity: Reviewer): Observable<Reviewer> {
+  update(entity: Category): Observable<Category> {
     const url = `${API_LINK}/${entity.id}`;
-    return this.http.put<Reviewer>(url, entity).pipe(
+    return this.http.put<Category>(url, entity).pipe(
       catchError((error: any) => {
         throw error;
       })

@@ -1,13 +1,11 @@
-import { Country } from 'src/app/models/country';
-import { CountryService } from 'src/app/services/country.service';
+import { Country } from 'src/app/_models/country';
+import { OwnerCreate } from 'src/app/_models/owner';
+import { CountryService } from 'src/app/_services/country.service';
+import { OwnerService } from 'src/app/_services/owner.service';
 
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { OwnerCreate } from '../../../models/owner';
-import { OwnerService } from '../../../services/owner.service';
 
 @Component({
   selector: 'app-owner-create',

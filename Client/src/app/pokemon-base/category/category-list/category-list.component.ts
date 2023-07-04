@@ -1,5 +1,5 @@
-import { Category } from 'src/app/models/category';
-import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/_models/category';
+import { CategoryService } from 'src/app/_services/category.service';
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';

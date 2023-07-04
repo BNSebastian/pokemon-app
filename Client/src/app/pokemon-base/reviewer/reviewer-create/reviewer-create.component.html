@@ -1,1 +1,27 @@
-<p>reviewer-create works!</p>
+<div>
+  <div [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Name -->
+
+    <mat-form-field>
+      <mat-label>first name</mat-label>
+      <input matInput formControlName="firstName" placeholder="Type a first name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>last name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Type a last name" />
+    </mat-form-field>
+
+    <div>
+      <button mat-flat-button
+              color="primary"
+              type="submit"
+              (click)="onSubmit()">
+        Save
+      </button>
+      <button mat-flat-button color="secondary" [routerLink]="['/reviewer']">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
