@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from '../_guards/auth.guard';
 import { LoginComponent } from '../account/login/login.component';
 import { RegisterComponent } from '../account/register/register.component';
 import { NotfoundComponent } from '../errors/notfound/notfound.component';
@@ -28,24 +29,32 @@ const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'category', component: CategoryComponent },
-  { path: 'category/create', component: CategoryCreateComponent },
-  { path: 'category/:id', component: CategoryUpdateComponent },
-  { path: 'country', component: CountryComponent },
-  { path: 'country/create', component: CountryCreateComponent },
-  { path: 'country/:id', component: CountryUpdateComponent },
-  { path: 'owner', component: OwnerComponent },
-  { path: 'owner/create', component: OwnerCreateComponent },
-  { path: 'owner/:id', component: OwnerUpdateComponent },
-  { path: 'pokemon', component: PokemonComponent },
-  { path: 'pokemon/create', component: PokemonCreateComponent },
-  { path: 'pokemon/:id', component: PokemonUpdateComponent },
-  { path: 'review', component: ReviewComponent },
-  { path: 'review/create', component: ReviewCreateComponent },
-  { path: 'review/:id', component: ReviewUpdateComponent },
-  { path: 'reviewer', component: ReviewerComponent },
-  { path: 'reviewer/create', component: ReviewerCreateComponent },
-  { path: 'reviewer/:id', component: ReviewerUpdateComponent },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'category', component: CategoryComponent },
+      { path: 'category/create', component: CategoryCreateComponent },
+      { path: 'category/:id', component: CategoryUpdateComponent },
+      { path: 'country', component: CountryComponent },
+      { path: 'country/create', component: CountryCreateComponent },
+      { path: 'country/:id', component: CountryUpdateComponent },
+      { path: 'owner', component: OwnerComponent },
+      { path: 'owner/create', component: OwnerCreateComponent },
+      { path: 'owner/:id', component: OwnerUpdateComponent },
+      { path: 'pokemon', component: PokemonComponent },
+      { path: 'pokemon/create', component: PokemonCreateComponent },
+      { path: 'pokemon/:id', component: PokemonUpdateComponent },
+      { path: 'review', component: ReviewComponent },
+      { path: 'review/create', component: ReviewCreateComponent },
+      { path: 'review/:id', component: ReviewUpdateComponent },
+      { path: 'reviewer', component: ReviewerComponent },
+      { path: 'reviewer/create', component: ReviewerCreateComponent },
+      { path: 'reviewer/:id', component: ReviewerUpdateComponent },
+    ],
+  },
+
   { path: '**', component: NotfoundComponent },
 ];
 
