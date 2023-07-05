@@ -8,11 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './_modules/angular-material.module';
 import { AppRoutingModule } from './_modules/app-routing.module';
 import { PokemonBaseModule } from './_modules/pokemon-base.module';
+import { LoginComponent } from './account/login/login.component';
+import { RegisterComponent } from './account/register/register.component';
 import { AppComponent } from './app.component';
 import { NotfoundComponent } from './errors/notfound/notfound.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RegisterComponent } from './register/register.component';
     HomeComponent,
     NavMenuComponent,
     RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     AngularMaterialModule,

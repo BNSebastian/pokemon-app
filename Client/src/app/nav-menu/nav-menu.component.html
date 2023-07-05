@@ -3,15 +3,29 @@
     <button mat-icon-button [routerLink]="['/']">
       <mat-icon> home </mat-icon>
     </button>
-    <a mat-flat-button color="primary" [routerLink]="['/pokemon']">Pokemons</a>
-    <a mat-flat-button color="primary" [routerLink]="['/category']"
-      >Categories</a
-    >
-    <a mat-flat-button color="primary" [routerLink]="['/country']">Countries</a>
-    <a mat-flat-button color="primary" [routerLink]="['/owner']">Owners</a>
-    <a mat-flat-button color="primary" [routerLink]="['/reviewer']"
-      >Reviewers</a
-    >
-    <a mat-flat-button color="primary" [routerLink]="['/review']">Reviews</a>
+    <ng-container *ngIf="accountService.currentUser$ | async">
+      <a mat-flat-button color="primary" [routerLink]="['/pokemon']"
+        >Pokemons</a
+      >
+      <a mat-flat-button color="primary" [routerLink]="['/category']"
+        >Categories</a
+      >
+      <a mat-flat-button color="primary" [routerLink]="['/country']"
+        >Countries</a
+      >
+      <a mat-flat-button color="primary" [routerLink]="['/owner']">Owners</a>
+      <a mat-flat-button color="primary" [routerLink]="['/reviewer']"
+        >Reviewers</a
+      >
+      <a mat-flat-button color="primary" [routerLink]="['/review']">Reviews</a>
+
+      <a (click)="logout()" mat-flat-button color="primary">Logout</a>
+    </ng-container>
+    <ng-container *ngIf="(accountService.currentUser$ | async) === null">
+      <a mat-flat-button color="primary" [routerLink]="['/register']"
+        >Sign up</a
+      >
+      <a mat-flat-button color="primary" [routerLink]="['/login']">Login</a>
+    </ng-container>
   </mat-toolbar>
 </header>
